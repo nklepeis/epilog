@@ -90,6 +90,17 @@ public class EventListener implements Listener {
 			BlockBreakEvent bbe = (BlockBreakEvent) event;
 			logEvent.material = bbe.getBlock().getType();
 		}
+		if (event instanceof PlayerMoveEvent) {
+			PlayerMoveEvent pme = (PlayerMoveEvent) event;
+			logEvent.material = pme.getTo().getBlock().getType();
+			logEvent.biome = pme.getTo().getBlock().getBiome();
+			logEvent.liquid = pme.getTo().getBlock().isLiquid();
+			logEvent.temp = pme.getTo().getBlock().getTemperature();
+			logEvent.humid = pme.getTo().getBlock().getHumidity();
+			logEvent.blockLight = pme.getTo().getBlock().getLightFromBlocks();
+			logEvent.skyLight = pme.getTo().getBlock().getLightFromSky();
+			logEvent.statet = pme.getTo().getBlock().getState();
+		}
 		logEvent.needsData = true;
 		epilog.postEvent(logEvent);
 	}
